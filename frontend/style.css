@@ -407,3 +407,117 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0,140,255,0.5);
 }
+/* 🔥 FOOTER */
+.footer {
+    margin-top: 60px;
+    padding: 40px 20px;
+
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
+
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+/* 📦 CONTAINER */
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+/* 🧱 SECTIONS */
+.footer-section h3,
+.footer-section h4 {
+    margin-bottom: 12px;
+}
+
+/* 🧾 TEXT */
+.footer-section p,
+.footer-section li,
+.footer-section a {
+    font-size: 14px;
+    color: #ccc;
+    text-decoration: none;
+}
+
+/* 🔗 LIST */
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section li {
+    margin-bottom: 8px;
+}
+
+/* 🔥 LINKS HOVER */
+.footer-section a:hover {
+    color: #00aaff;
+    transition: 0.3s;
+}
+
+/* 🚗 LOGO STYLE */
+.footer-logo {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.footer-logo span {
+    color: #00aaff;
+}
+
+/* 🌐 SOCIAL ICONS */
+.social-icons a {
+    margin-right: 10px;
+    font-size: 18px;
+    color: white;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: #00aaff;
+    transform: scale(1.2);
+}
+
+/* 📌 BOTTOM TEXT */
+.footer-bottom {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 13px;
+    color: #aaa;
+}
+.footer {
+    animation: fadeIn 1s ease-in;
+}
+/* 💳 QR SECTION */
+.qr-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* 🖼 QR IMAGE */
+.qr-image {
+    width: 200px;
+    height: 200px;
+
+    border-radius: 15px;
+    padding: 10px;
+
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+
+    transition: 0.3s;
+}
+
+/* 🔥 HOVER EFFECT */
+.qr-image:hover {
+    transform: scale(1.05);
+}
+
+/* 🧾 TEXT */
+.qr-section p {
+    margin-top: 10px;
+    color: #ccc;
+    font-size: 14px;
+}
