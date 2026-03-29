@@ -2,18 +2,20 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
+
 app.use(cors());
 app.use(express.json());
 
-// ✅ DB Connection
+// ✅ DB Connection (POOL)
 const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    port: process.env.DB_PORT, // 🔥 ADD THIS
+    port: process.env.DB_PORT,
     waitForConnections: true,
     connectionLimit: 10
 });
@@ -27,17 +29,18 @@ db.getConnection((err, connection) => {
     }
 });
 
-// ✅ TEST ROUTE
+// ✅ ROOT ROUTE
 app.get('/', (req, res) => {
-    res.res.json({
-    status: "ok",
-    message: "Rentora API running 🚀"
+    res.json({
+        status: "ok",
+        message: "Rentora API running 🚀"
+    });
 });
 
 // 🚗 GET ALL CARS
 app.get('/cars', (req, res) => {
     db.query("SELECT * FROM Car", (err, result) => {
-        if (err) return res.send(err);
+        if (err) return res.json({ error: err.message });
         res.json(result);
     });
 });
@@ -50,9 +53,8 @@ app.post('/rent', (req, res) => {
         "INSERT INTO Rental (Customer_ID, Car_ID, Rental_Date, Return_Date, Total_Amount) VALUES (?, ?, ?, ?, ?)",
         [customer_id, car_id, rental_date, return_date, total],
         (err, result) => {
-            if (err) return res.send(err);
+            if (err) return res.json({ error: err.message });
 
-            // ✅ RETURN JSON
             res.json({
                 message: "Car rented successfully ✅",
                 rental_id: result.insertId
@@ -69,18 +71,18 @@ app.post('/payment', (req, res) => {
         "INSERT INTO Payment (Rental_ID, Payment_Date, Payment_Method, Amount) VALUES (?, NOW(), ?, ?)",
         [rental_id, method, amount],
         (err, result) => {
-            if (err) return res.send(err);
-            res.res.json({
-                        success: true,
-                        message: "Payment successful"
-});
+            if (err) return res.json({ error: err.message });
+
+            res.json({
+                success: true,
+                message: "Payment successful"
+            });
         }
     );
 });
 
 // 📄 GET RENTAL HISTORY
 app.get('/rentals', (req, res) => {
-    console.log("👉 /rentals route hit");
     db.query(`
         SELECT 
             Rental.Rental_ID,
@@ -92,14 +94,10 @@ app.get('/rentals', (req, res) => {
         INNER JOIN Car 
         ON Rental.Car_ID = Car.Car_ID
     `, (err, result) => {
-        if (err) {
-            console.log(err);
-            return res.send(err);
-        }
+        if (err) return res.json({ error: err.message });
         res.json(result);
     });
 });
-
 
 // 🔐 SIGNUP
 app.post('/signup', async (req, res) => {
@@ -114,15 +112,13 @@ app.post('/signup', async (req, res) => {
             VALUES (?, ?, ?, ?, ?, ?)`,
             [name, email, phone, address, license, hashed],
             (err, result) => {
-                if (err) {
-                    console.log(err);
-                    return res.send(err.message);
-                }
-                res.send("Signup successful ✅");
+                if (err) return res.json({ error: err.message });
+
+                res.json({ message: "Signup successful ✅" });
             }
         );
     } catch (err) {
-        res.send(err.message);
+        res.json({ error: err.message });
     }
 });
 
@@ -135,16 +131,13 @@ app.post('/login', (req, res) => {
         [email],
         async (err, result) => {
 
-            if (err) {
-                return res.json({ success: false, message: "Server error" });
-            }
+            if (err) return res.json({ success: false, message: "Server error" });
 
             if (result.length === 0) {
                 return res.json({ success: false, message: "User not found" });
             }
 
             const user = result[0];
-
             const match = await bcrypt.compare(password, user.password);
 
             if (match) {
@@ -160,9 +153,7 @@ app.post('/login', (req, res) => {
     );
 });
 
-
 // 🚀 SERVER START
-const PORT = 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
