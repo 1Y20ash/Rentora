@@ -27,7 +27,7 @@ if (!user) {
     alert("Please login first ❌");
     window.location.href = "login.html";
 }
-fetch("http://localhost:3000/cars")
+fetch("https://rentora-backend-c2dy.onrender.com/cars")
 .then(res => res.json())
 .then(data => {
     const container = document.getElementById("cars");
@@ -90,7 +90,7 @@ function rentCar(carId, rate) {
 
     const total = days * rate;
 
-    fetch("http://localhost:3000/rent", {
+    fetch("https://rentora-backend-c2dy.onrender.com/rent", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

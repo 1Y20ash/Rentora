@@ -6,7 +6,7 @@ function signup() {
     const license = document.getElementById("license").value;
     const password = document.getElementById("password").value;
 
-    fetch("http://localhost:3000/signup", {
+    fetch("https://rentora-backend-c2dy.onrender.com/signup", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

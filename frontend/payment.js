@@ -7,7 +7,7 @@ function makePayment() {
 
     const method = document.getElementById("method").value;
 
-    fetch("http://localhost:3000/payment", {
+    fetch("https://rentora-backend-c2dy.onrender.com/payment", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

@@ -1,4 +1,4 @@
-fetch("http://localhost:3000/rentals")
+fetch("https://rentora-backend-c2dy.onrender.com/rentals")
 .then(res => res.json())
 .then(data => {
     console.log("DATA:", data);
