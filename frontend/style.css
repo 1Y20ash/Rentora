@@ -496,23 +496,14 @@ body {
 
 /* 🖼 QR IMAGE */
 .qr-image {
-    width: 200px;
-    height: 200px;
-
-    border-radius: 15px;
-    padding: 10px;
-
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-
-    transition: 0.3s;
+    width: 100%;
+    max-width: 300px; /* 🔥 controls max size */
+    height: auto;
 }
 
-/* 🔥 HOVER EFFECT */
 .qr-image:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0,255,195,0.6);
 }
 
 /* 🧾 TEXT */
