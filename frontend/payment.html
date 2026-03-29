@@ -12,7 +12,8 @@
 <div class="payment-box">
 <h3 id="amount"></h3>
 
-<select id="method">
+<select id="method" onchange="toggleQR()">
+    <option value="">Select Payment Method</option>
     <option value="UPI">UPI</option>
     <option value="Card">Card</option>
     <option value="Cash">Cash</option>
@@ -23,7 +24,7 @@
 <button onclick="makePayment()">Pay Now</button>
 </div>
 
-<div class="qr-section">
+<div id="qrBox" class="qr-section" style="display: none;">
     <h3>Scan & Pay (UPI)</h3>
 
     <img src="images/qr.png" alt="UPI QR Code" class="qr-image">
@@ -41,7 +42,7 @@
             <h3 class="footer-logo">
                 <i class="fa-solid fa-car"></i> Rent<span>ora</span>
             </h3>
-            <p>Premium car rentals for a seamless driving experience 🚗</p>
+            <p>Premium car rentals for a seamless driving experience </p>
         </div>
 
         <!-- 🚗 FEATURES -->

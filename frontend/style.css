@@ -521,3 +521,6 @@ body {
     color: #ccc;
     font-size: 14px;
 }
+.qr-section {
+    transition: all 0.4s ease;
+}

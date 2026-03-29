@@ -24,3 +24,13 @@ function makePayment() {
         window.location.href = "success.html";
     });
 }
+function toggleQR() {
+    const method = document.getElementById("method").value;
+    const qr = document.getElementById("qrBox");
+
+    if (method === "UPI") {
+        qr.style.display = "block";
+    } else {
+        qr.style.display = "none";
+    }
+}
